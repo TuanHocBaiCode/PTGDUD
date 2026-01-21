@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Bài 1,2: -->
+    <h3>Bài 1,2: Tính BMI</h3>
+    Can nang cua Mark: <input type="weightMark" id="weightMark" placeholder="weightMark"><br>
+    Chieu cao cua Mark: <input type="heightMark" id="heightMark" placeholder="heightMark"><br>
+    Can nang cua John: <input type="weightJohn" id="weightJohn" placeholder="weightJohn"><br>
+    Chieu cao cua John: <input type="heightJohn" id="heightJohn" placeholder="heightJohn"><br>
+    <button onclick="calculateBMI()" id="cal">Calculation</button>
+    <p id="result"></p>
+
+    <!-- Bài 3 -->
+    <h3>Bài 3: Gymnastics Competition</h3>
+    <div class="team">
+    <h3>Dolphins</h3>
+    <input type="number" id="d1" placeholder="Score 1">
+    <input type="number" id="d2" placeholder="Score 2">
+    <input type="number" id="d3" placeholder="Score 3">
+    </div>
+    <div class="team">
+    <h3>Koalas</h3>
+    <input type="number" id="k1" placeholder="Score 1">
+    <input type="number" id="k2" placeholder="Score 2">
+    <input type="number" id="k3" placeholder="Score 3">
+    </div>
+    <button onclick="checkWinner()">Check Winner</button>
+    <div id="result1"></div>
+
+    <!-- Bài 4 -->
+     <h3>Bài 4: Tip Calculator</h3>
+
+    <p>Enter the bill value:</p>
+    <input type="number" id="bill" placeholder="Bill amount">
+    <br>
+    <button onclick="calculateTip()">Calculate</button>
+    <div id="result2"></div>
+    <script>
+        var weightMark = document.getElementById('weightMark');
+        var heightMark = document.getElementById('heightMark');
+        var weightJohn = document.getElementById('weightJohn');
+        var heightJohn = document.getElementById('heightJohn');
+        function calculateBMI(){
+            BMIMark = weightMark.value/heightMark.value**2;
+            BMIJohn = weightJohn.value/heightJohn.value**2;
+            const markHigherBMI = BMIMark > BMIJohn;
+            console.log("MarkBMI: ",BMIMark.toFixed(2));
+            console.log('JohnBMI: ',BMIJohn.toFixed(2));
+            console.log("Mark higher than John:", markHigherBMI);
+            document.getElementById('result').innerHTML = `
+                Mark BMI: ${BMIMark.toFixed(2)} <br>
+                John BMI: ${BMIJohn.toFixed(2)} <br>
+                Mark có BMI cao hơn John: ${markHigherBMI}
+            `;
+            if (markHigherBMI==true) {
+                console.log("Mark's BMI is higher than John's!");
+            }else console.log("John's BMI is higher than Mark's!");
+        }
+
+        function calcAverage(a, b, c) {
+            return (a + b + c) / 3;
+        }
+        function checkWinner() {
+            const d1 = Number(document.getElementById("d1").value);
+            const d2 = Number(document.getElementById("d2").value);
+            const d3 = Number(document.getElementById("d3").value);
+
+            const k1 = Number(document.getElementById("k1").value);
+            const k2 = Number(document.getElementById("k2").value);
+            const k3 = Number(document.getElementById("k3").value);
+
+            const resultDiv = document.getElementById("result1");
+
+            // Validate input
+            if (!d1 || !d2 || !d3 || !k1 || !k2 || !k3) {
+                resultDiv.innerHTML = "Please enter all scores.";
+                return;
+            }
+
+            const dolphinsAvg = calcAverage(d1, d2, d3);
+            const koalasAvg = calcAverage(k1, k2, k3);
+            const MIN_SCORE = 100;
+
+            let resultText = `Dolphins Average: ${dolphinsAvg.toFixed(2)}<br>`;
+            resultText += `Koalas Average: ${koalasAvg.toFixed(2)}<br><br>`;
+
+            if (dolphinsAvg > koalasAvg && dolphinsAvg >= MIN_SCORE) {
+                resultText += "Dolphins win the trophy!";
+            } else if (koalasAvg > dolphinsAvg && koalasAvg >= MIN_SCORE) {
+                resultText += "Koalas win the trophy!";
+            } else if (
+                dolphinsAvg === koalasAvg &&
+                dolphinsAvg >= MIN_SCORE &&
+                koalasAvg >= MIN_SCORE
+            ) {
+                resultText += "It's a draw! Both teams win the trophy!";
+            } else {
+                resultText += "No team wins the trophy.";
+            }
+            resultDiv.innerHTML = resultText;
+        }
+
+        function calculateTip() {
+            const bill = Number(document.getElementById("bill").value);
+            const resultDiv = document.getElementById("result2");
+
+            if (bill <= 0) {
+                resultDiv.innerHTML = "⚠️ Please enter a valid bill value.";
+                return;
+            }
+            // Calculate tip using ternary operator (no if/else)
+            const tip = bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
+            const total = bill + tip;
+            resultDiv.innerHTML = `
+            The bill was <b>${bill}</b>,<br>
+            the tip was <b>${tip.toFixed(2)}</b>,<br>
+            and the total value <b>${total.toFixed(2)}</b>
+            `;
+            }
+    </script>
+</body>
+</html>
