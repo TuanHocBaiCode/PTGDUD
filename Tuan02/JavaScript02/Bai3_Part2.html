@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bai3_Part2</title>
+</head>
+<body>
+    Can nang cua Mark: <input type="weightMark" id="weightMark" placeholder="weightMark"><br>
+    Chieu cao cua Mark: <input type="heightMark" id="heightMark" placeholder="heightMark"><br>
+    Can nang cua John: <input type="weightJohn" id="weightJohn" placeholder="weightJohn"><br>
+    Chieu cao cua John: <input type="heightJohn" id="heightJohn" placeholder="heightJohn"><br>
+    <button onclick="calculateBMI()" id="cal">Calculation</button>
+    <p id="result"></p>
+</body>
+<script>
+    function calculateBMI() {
+        const weightMark = Number(document.getElementById("weightMark").value);
+        const heightMark = Number(document.getElementById("heightMark").value);
+
+        const weightJohn = Number(document.getElementById("weightJohn").value);
+        const heightJohn = Number(document.getElementById("heightJohn").value);
+
+        const result = document.getElementById("result");
+
+        // Validate input
+        if (
+            weightMark <= 0 || heightMark <= 0 ||
+            weightJohn <= 0 || heightJohn <= 0
+        ) {
+            result.innerHTML = "Vui lòng nhập đầy đủ và hợp lệ cân nặng & chiều cao.";
+            return;
+        }
+
+        const mark = {
+            fullName: "Mark Miller",
+            mass: weightMark,
+            height: heightMark,
+            calcBMI: function () {
+                this.bmi = this.mass / (this.height * this.height);
+                return this.bmi;
+            }
+        };
+
+        const john = {
+            fullName: "John Smith",
+            mass: weightJohn,
+            height: heightJohn,
+            calcBMI: function () {
+                this.bmi = this.mass / (this.height * this.height);
+                return this.bmi;
+            }
+        };
+
+        mark.calcBMI();
+        john.calcBMI();
+
+        if (mark.bmi > john.bmi) {
+            result.innerHTML = `
+                ${mark.fullName}'s BMI (${mark.bmi.toFixed(1)}) 
+                is higher than ${john.fullName}'s (${john.bmi.toFixed(1)})!
+            `;
+        } else {
+            result.innerHTML = `
+                ${john.fullName}'s BMI (${john.bmi.toFixed(1)}) 
+                is higher than ${mark.fullName}'s (${mark.bmi.toFixed(1)})!
+            `;
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bai4_part2</title>
+</head>
+<body>
+    <button onclick="calculateTip()">Calculate</button>
+    <div id="result2"></div>
+</body>
+<script>
+    function calcTip(bill) {
+        return bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
+    }
+
+    function calcAverage(arr) {
+        let sum = 0;
+        for (let i = 0; i < arr.length; i++) {
+            sum += arr[i];
+        }
+        return sum / arr.length;
+    }
+
+    function calculateTip() {
+        const resultDiv = document.getElementById("result2");
+
+        // 1. Bills array (theo đề bài)
+        const bills = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
+
+        // 2. Empty arrays
+        const tips = [];
+        const totals = [];
+
+        // 3. Loop tính tip & total
+        for (let i = 0; i < bills.length; i++) {
+            const tip = calcTip(bills[i]);
+            tips.push(tip);
+            totals.push(bills[i] + tip);
+        }
+
+        // Bonus: average of totals
+        const avgTotal = calcAverage(totals);
+
+        // Hiển thị kết quả
+        let output = "<b>Bills:</b> " + bills.join(", ") + "<br><br>";
+        output += "<b>Tips:</b> " + tips.map(t => t.toFixed(2)).join(", ") + "<br><br>";
+        output += "<b>Totals:</b> " + totals.map(t => t.toFixed(2)).join(", ") + "<br><br>";
+        output += `<b>Average Total:</b> ${avgTotal.toFixed(2)}`;
+
+        resultDiv.innerHTML = output;
+    }
+</script>
+</html>

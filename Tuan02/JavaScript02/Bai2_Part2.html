@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bai2_part2</title>
+</head>
+<body>
+        <p>Enter the bill value:</p>
+    <input type="number" id="bill" placeholder="Bill amount">
+    <br>
+    <button onclick="calculateTip()">Calculate</button>
+    <div id="result2"></div>
+</body>
+<script>
+    function calcTip(bill) {
+        return bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
+    }
+    function calculateTip() {
+        const bill = Number(document.getElementById("bill").value);
+        const resultDiv = document.getElementById("result2");
+
+        if (bill <= 0) {
+            resultDiv.innerHTML = "Please enter a valid bill value.";
+            return;
+        }
+
+        // GỌI HÀM calcTip (đúng yêu cầu đề)
+        const tip = calcTip(bill);
+        const total = bill + tip;
+
+        resultDiv.innerHTML = `
+            The bill was <b>${bill}</b>,<br>
+            the tip was <b>${tip.toFixed(2)}</b>,<br>
+            and the total value <b>${total.toFixed(2)}</b>
+        `;
+    }
+</script>
+</html>
