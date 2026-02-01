@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Skills & Editor Setup</title>
+</head>
+<body>
+    <h2>Weather Forecast</h2>
+
+    <div id="result"></div>
+
+    <script>
+        function printForecast(arr) {
+            let forecast = "";
+
+            for (let i = 0; i < arr.length; i++) {
+                forecast += `... ${arr[i]}ºC in ${i + 1} days `;
+            }
+
+            console.log(forecast);
+            return forecast;
+        }
+
+        const data1 = [17, 21, 23];
+        const data2 = [12, 5, -5, 0, 4];
+
+        // Hiển thị kết quả
+        const resultDiv = document.getElementById("result");
+        resultDiv.innerHTML = `
+            <b>Data 1:</b><br>
+            ${printForecast(data1)}<br><br>
+
+            <b>Data 2:</b><br>
+            ${printForecast(data2)}
+        `;
+    </script>
+</body>
+</html>
